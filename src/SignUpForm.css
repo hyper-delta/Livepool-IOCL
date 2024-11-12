@@ -1,0 +1,72 @@
+/* SignUpForm.css */
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .signup-modal {
+    background-color: #FEFEFE;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .signup-modal h2 {
+    color: #02164F;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 1rem;
+    color: #02164F;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .submit-button {
+    background-color: #F37022;
+    color: #FEFEFE;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #02164F;
+    cursor: pointer;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  

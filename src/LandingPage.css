@@ -94,3 +94,25 @@
   text-align: center;
   background-color: #f5f5f5;
 }
+
+/* LandingPage.css */
+.user-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-name {
+  color: #FEFEFE;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.logout-button {
+  background-color: #02164F;
+  color: #FEFEFE;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
