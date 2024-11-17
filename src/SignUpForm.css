@@ -1,72 +1,132 @@
-/* SignUpForm.css */
+/* Modal Background */
 .modal-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+  z-index: 1000;
+}
+
+/* Modal Box */
+.signup-modal {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+/* Modal Header */
+.signup-modal h2 {
+  color: #02164F;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1rem;
+  color: #02164F;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #02164F;
+  outline: none;
+  box-shadow: 0 0 5px rgba(2, 22, 79, 0.5);
+}
+
+/* Submit Button */
+.submit-button {
+  background: linear-gradient(90deg, #F37022, #FF8C42);
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+  display: inline-block;
+  width: 100%;
+}
+
+.submit-button:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #02164F;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #F37022;
+  transform: rotate(90deg);
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
   }
-  
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Accessibility: Responsive Design */
+@media (max-width: 480px) {
   .signup-modal {
-    background-color: #FEFEFE;
+    width: 90%;
     padding: 20px;
-    border-radius: 10px;
-    width: 400px;
-    text-align: center;
-    position: relative;
   }
-  
-  .signup-modal h2 {
-    color: #02164F;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 1rem;
-    color: #02164F;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
+
   .submit-button {
-    background-color: #F37022;
-    color: #FEFEFE;
+    font-size: 1rem;
     padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
   }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #02164F;
-    cursor: pointer;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
+}
