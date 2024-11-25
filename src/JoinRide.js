@@ -7,18 +7,39 @@ const JoinRide = () => {
   const [rides, setRides] = useState([]);
 
   useEffect(() => {
-    const ridesRef = ref(database, 'rides/');
-    onValue(ridesRef, (snapshot) => {
-      const data = snapshot.val();
-      const ridesList = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
-      setRides(ridesList);
+    const usersRef = ref(database, 'users/');
+    
+    // Fetch all rides under each user's hostedRides node
+    onValue(usersRef, (snapshot) => {
+      const usersData = snapshot.val();
+      const allRides = [];
+
+      if (usersData) {
+        Object.keys(usersData).forEach(userId => {
+          if (usersData[userId].hostedRides) {
+            const userRides = usersData[userId].hostedRides;
+            Object.keys(userRides).forEach(rideId => {
+              allRides.push({ 
+                id: rideId, 
+                ...userRides[rideId], 
+                hostId: userId, 
+                hostName: usersData[userId].fullName || 'Unknown', 
+                hostEmail: usersData[userId].email || 'Unknown',
+                hostIdCard: usersData[userId].employeeIdCard || null, // Fetch employee ID Card
+              });
+            });
+          }
+        });
+      }
+
+      setRides(allRides);
     });
   }, []);
 
-  const handleJoinRide = (rideId, seatsAvailable) => {
+  const handleJoinRide = (hostId, rideId, seatsAvailable) => {
     if (seatsAvailable > 0) {
       // Decrement seat count in Firebase
-      const rideRef = ref(database, `rides/${rideId}`);
+      const rideRef = ref(database, `users/${hostId}/hostedRides/${rideId}`);
       update(rideRef, {
         seatsAvailable: seatsAvailable - 1
       }).then(() => {
@@ -44,9 +65,21 @@ const JoinRide = () => {
               <p><strong>Pickup Location:</strong> {ride.pickupLocation}</p>
               <p><strong>Destination:</strong> {ride.destination}</p>
               <p><strong>Seats Available:</strong> {ride.seatsAvailable}</p>
+              <p><strong>Host Name:</strong> {ride.hostName}</p>
+              <p><strong>Host Email:</strong> {ride.hostEmail}</p>
+              {ride.hostIdCard && (
+                <div className="id-card-container">
+                  <h4>Host ID Card:</h4>
+                  <img
+                    src={ride.hostIdCard}
+                    alt={`${ride.hostName}'s ID Card`}
+                    className="id-card-image"
+                  />
+                </div>
+              )}
               <button 
                 className="cta-button join-button"
-                onClick={() => handleJoinRide(ride.id, ride.seatsAvailable)}
+                onClick={() => handleJoinRide(ride.hostId, ride.id, ride.seatsAvailable)}
                 disabled={ride.seatsAvailable === 0}
               >
                 {ride.seatsAvailable > 0 ? 'Join Ride' : 'No Seats Available'}
