@@ -9,6 +9,10 @@ const HostRide = () => {
     pickupLocation: '',
     destination: '',
     seatsAvailable: '',
+    dateTime: '',
+    carCompany: '',
+    carModel: '',
+    numberPlate: '',
   });
 
   const [userData, setUserData] = useState(null); // To store logged-in user's details
@@ -81,6 +85,10 @@ const HostRide = () => {
           pickupLocation: '',
           destination: '',
           seatsAvailable: '',
+          dateTime: '',
+          carCompany: '',
+          carModel: '',
+          numberPlate: '',
         });
       })
       .catch((error) => {
@@ -119,6 +127,49 @@ const HostRide = () => {
             name="seatsAvailable"
             value={rideDetails.seatsAvailable}
             onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Date and Time:</label>
+          <input
+            type="datetime-local"
+            name="dateTime"
+            value={rideDetails.dateTime}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Car Company:</label>
+          <input
+            type="text"
+            name="carCompany"
+            value={rideDetails.carCompany}
+            onChange={handleChange}
+            placeholder="E.g., Toyota, Honda"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Car Model:</label>
+          <input
+            type="text"
+            name="carModel"
+            value={rideDetails.carModel}
+            onChange={handleChange}
+            placeholder="E.g., Corolla, Civic"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Number Plate:</label>
+          <input
+            type="text"
+            name="numberPlate"
+            value={rideDetails.numberPlate}
+            onChange={handleChange}
+            placeholder="E.g., ABC-1234"
             required
           />
         </div>

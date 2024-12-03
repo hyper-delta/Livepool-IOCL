@@ -1,45 +1,98 @@
 /* Host Ride Page Styles */
 .host-ride-container {
-    padding: 50px;
-    text-align: center;
-  }
-  
-  .ride-form {
-    max-width: 400px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-  }
-  
-  .form-group label {
-    margin-bottom: 5px;
-    font-size: 1rem;
-  }
-  
-  .form-group input {
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .cta-button.submit-button {
-    background-color: #F37022;
-    color: #FEFEFE;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .cta-button.submit-button:hover {
-    opacity: 0.9;
-  }
-  
+  padding: 50px;
+  text-align: center;
+}
+
+.ride-form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #02164F;
+}
+
+.form-group input {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input::placeholder {
+  font-style: italic;
+  color: #888;
+}
+
+/* Date and Time input field */
+.form-group input[type="datetime-local"] {
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  background-color: #FEFEFE;
+  border: 1px solid #02164F;
+  color: #02164F;
+  border-radius: 5px;
+  padding: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input[type="datetime-local"]:focus {
+  border-color: #F37022;
+  outline: none;
+}
+
+/* Car details input fields */
+.form-group input[name="carCompany"],
+.form-group input[name="carModel"],
+.form-group input[name="numberPlate"] {
+  background-color: #FEFEFE;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  color: #333;
+}
+
+.form-group input[name="carCompany"]:focus,
+.form-group input[name="carModel"]:focus,
+.form-group input[name="numberPlate"]:focus {
+  border-color: #F37022;
+  box-shadow: 0 0 5px rgba(243, 112, 34, 0.5);
+  outline: none;
+}
+
+/* Submit button */
+.cta-button.submit-button {
+  background-color: #F37022;
+  color: #FEFEFE;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button.submit-button:hover {
+  background-color: #02164F;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button.submit-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
