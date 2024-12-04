@@ -2,17 +2,43 @@
 .join-ride-container {
   padding: 50px;
   text-align: center;
+  background-color: #f7f7f7;
 }
 
 h2 {
   font-size: 2.5rem;
   color: #02164F;
+  margin-bottom: 20px;
 }
 
 .no-rides-message {
   font-size: 1.5rem;
   color: #F37022;
   margin-top: 30px;
+}
+
+/* Date Filter */
+.date-filter {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.date-input {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  width: 200px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #F37022;
+  box-shadow: 0 4px 8px rgba(243, 112, 34, 0.5);
 }
 
 /* Rides grid */
@@ -25,12 +51,13 @@ h2 {
 
 /* Ride card styles */
 .ride-card {
-  background-color: #FEFEFE;
+  background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .ride-card:hover {
@@ -38,36 +65,112 @@ h2 {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.ride-card h3 {
-  color: #02164F;
-  margin-bottom: 15px;
-}
-
 .ride-card p {
-  font-size: 1.1rem;
-  margin: 10px 0;
+  font-size: 1rem;
+  color: #333;
+  margin: 5px 0;
 }
 
 .ride-card p strong {
+  color: #02164F;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+.modal-content h3 {
+  font-size: 1.8rem;
+  color: #02164F;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #F37022;
+  padding-bottom: 10px;
+}
+
+.modal-content p {
+  font-size: 1rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.modal-content p strong {
   color: #F37022;
 }
 
-/* ID card container styles */
+/* Modal close button */
+.cta-button.close-button {
+  background-color: #F37022;
+  color: #ffffff;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.cta-button.close-button:hover {
+  background-color: #02164F;
+}
+
+/* Join Ride button inside modal */
+.cta-button.join-button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  background-color: #02164F;
+  color: #ffffff;
+  padding: 12px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button.join-button:hover {
+  background-color: #F37022;
+}
+
+/* Ensure ID card image fits inside the modal */
 .id-card-container {
-  margin-top: 15px;
+  margin-top: 10px;
   text-align: center;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
-  background-color: #F9F9F9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.id-card-container h4 {
-  margin-bottom: 10px;
-  color: #02164F;
-  font-size: 1.1rem;
-  font-weight: bold;
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 250px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .id-card-image {
@@ -76,24 +179,37 @@ h2 {
   border-radius: 5px;
   object-fit: cover;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease;
 }
 
-.id-card-image:hover {
-  transform: scale(1.05);
+/* Responsive layout */
+@media (max-width: 600px) {
+  .rides-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 90%;
+  }
 }
 
-/* Join Ride button */
-.cta-button.join-button {
-  background-color: #F37022;
-  color: #FEFEFE;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.cta-button.join-button:hover {
-  background-color: #02164F;
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
