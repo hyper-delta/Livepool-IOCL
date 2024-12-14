@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ref, onValue, update } from "firebase/database";
+import { ref, onValue, update, push } from "firebase/database";
+import { getAuth } from 'firebase/auth';
 import database from './firebase';
 import './JoinRide.css';
 
@@ -7,6 +8,8 @@ const JoinRide = () => {
   const [rides, setRides] = useState([]);
   const [selectedRide, setSelectedRide] = useState(null);
   const [filterDate, setFilterDate] = useState(''); // State for selected date filter
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
 
   useEffect(() => {
     const usersRef = ref(database, 'users/');
@@ -36,11 +39,33 @@ const JoinRide = () => {
     });
   }, []);
 
-  const handleJoinRide = (hostId, rideId, seatsAvailable) => {
+  const handleJoinRide = (hostId, rideId, seatsAvailable, rideDetails) => {
+    if (!currentUser) {
+      alert('Please log in to join a ride.');
+      return;
+    }
+
     if (seatsAvailable > 0) {
       const rideRef = ref(database, `users/${hostId}/hostedRides/${rideId}`);
+      const userJoinedRidesRef = ref(database, `users/${currentUser.uid}/joinedRides`);
+
+      // Update seat count in hosted rides
       update(rideRef, { seatsAvailable: seatsAvailable - 1 })
-        .then(() => alert('You have successfully joined the ride!'))
+        .then(() => {
+          // Add the ride details to the user's "joinedRides" list
+          const joinedRideDetails = {
+            ...rideDetails,
+            hostId: hostId,
+            timestamp: Date.now(),
+          };
+          push(userJoinedRidesRef, joinedRideDetails)
+            .then(() => {
+              alert('You have successfully joined the ride!');
+            })
+            .catch((error) => {
+              console.error('Error adding ride to joinedRides:', error);
+            });
+        })
         .catch((error) => console.error('Error updating seat count:', error));
     } else {
       alert('No seats available!');
@@ -132,7 +157,7 @@ const JoinRide = () => {
             )}
             <button 
               className="cta-button join-button"
-              onClick={() => handleJoinRide(selectedRide.hostId, selectedRide.id, selectedRide.seatsAvailable)}
+              onClick={() => handleJoinRide(selectedRide.hostId, selectedRide.id, selectedRide.seatsAvailable, selectedRide)}
               disabled={selectedRide.seatsAvailable === 0}
             >
               {selectedRide.seatsAvailable > 0 ? 'Join Ride' : 'No Seats Available'}

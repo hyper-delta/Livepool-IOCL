@@ -6,6 +6,7 @@ import { auth } from './firebase';
 import LandingPage from './LandingPage';
 import HostRide from './HostRide';
 import JoinRide from './JoinRide';
+import RideHistory from './RideHistory'; // Import the RideHistory component
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/host" element={<ProtectedRoute><HostRide /></ProtectedRoute>} />
         <Route path="/join" element={<ProtectedRoute><JoinRide /></ProtectedRoute>} />
+        <Route path="/ride-history" element={<ProtectedRoute><RideHistory /></ProtectedRoute>} /> {/* New route for RideHistory */}
       </Routes>
     </Router>
   );

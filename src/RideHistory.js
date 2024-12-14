@@ -1,70 +1,97 @@
-import React, { useEffect, useState } from 'react';
-import { ref, onValue } from 'firebase/database';
-import database from './firebase';
+import React, { useState, useEffect } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import './RideHistory.css';
 
-const RideHistory = ({ userId }) => {
+const RideHistory = () => {
   const [hostedRides, setHostedRides] = useState([]);
-  const [joinedRides, setJoinedRides] = useState([]);
+  const [joinedRides, setJoinedRides] = useState([]); // State for joined rides
+  const [loading, setLoading] = useState(true); // State to manage loading
+  const auth = getAuth(); // Access Firebase Authentication
+  const database = getDatabase();
 
   useEffect(() => {
-    // Fetch hosted rides for the logged-in user
-    const hostedRidesRef = ref(database, `users/${userId}/hostedRides`);
-    onValue(hostedRidesRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setHostedRides(Object.values(data));
-      } else {
-        setHostedRides([]);
-      }
-    });
+    const user = auth.currentUser;
 
-    // Fetch joined rides for the logged-in user
-    const joinedRidesRef = ref(database, `users/${userId}/joinedRides`);
-    onValue(joinedRidesRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setJoinedRides(Object.values(data));
-      } else {
-        setJoinedRides([]);
-      }
-    });
-  }, [userId]);
+    if (user) {
+      // Fetch hosted rides for the logged-in user
+      const hostedRidesRef = ref(database, `users/${user.uid}/hostedRides`);
+      onValue(hostedRidesRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const ridesList = Object.entries(data).map(([key, value]) => ({
+            id: key,
+            ...value,
+          }));
+          setHostedRides(ridesList);
+        } else {
+          setHostedRides([]);
+        }
+        setLoading(false);
+      });
+
+      // Fetch joined rides for the logged-in user
+      const joinedRidesRef = ref(database, `users/${user.uid}/joinedRides`);
+      onValue(joinedRidesRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const ridesList = Object.entries(data).map(([key, value]) => ({
+            id: key,
+            ...value,
+          }));
+          setJoinedRides(ridesList);
+        } else {
+          setJoinedRides([]);
+        }
+      });
+    }
+  }, [auth, database]);
 
   return (
     <div className="ride-history-container">
       <h2>Your Ride History</h2>
 
-      <div className="ride-history-section">
-        <h3>Hosted Rides</h3>
-        {hostedRides.length === 0 ? (
-          <p>No rides hosted yet.</p>
-        ) : (
-          hostedRides.map((ride, index) => (
-            <div key={index} className="ride-card">
+      {/* Hosted Rides Section */}
+      <h3>Hosted Rides</h3>
+      {loading ? (
+        <p>Loading...</p>
+      ) : hostedRides.length > 0 ? (
+        <ul className="ride-list">
+          {hostedRides.map((ride) => (
+            <li key={ride.id} className="ride-item">
+              <h4 style={{ color: "#F37022", marginBottom: "10px" }}>{ride.carCompany} - {ride.carModel}</h4>
               <p><strong>Pickup Location:</strong> {ride.pickupLocation}</p>
               <p><strong>Destination:</strong> {ride.destination}</p>
-              <p><strong>Date and Time:</strong> {new Date(ride.dateTime).toLocaleString()}</p>
+              <p><strong>Date/Time:</strong> {ride.dateTime}</p>
               <p><strong>Seats Available:</strong> {ride.seatsAvailable}</p>
-            </div>
-          ))
-        )}
-      </div>
+              <p><strong>Number Plate:</strong> {ride.numberPlate}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No rides hosted yet.</p>
+      )}
 
-      <div className="ride-history-section">
-        <h3>Joined Rides</h3>
-        {joinedRides.length === 0 ? (
-          <p>No rides joined yet.</p>
-        ) : (
-          joinedRides.map((ride, index) => (
-            <div key={index} className="ride-card">
+      {/* Joined Rides Section */}
+      <h3>Joined Rides</h3>
+      {loading ? (
+        <p>Loading...</p>
+      ) : joinedRides.length > 0 ? (
+        <ul className="ride-list">
+          {joinedRides.map((ride) => (
+            <li key={ride.id} className="ride-item">
+              <h4 style={{ color: "#02164F", marginBottom: "10px" }}>{ride.carCompany} - {ride.carModel}</h4>
               <p><strong>Pickup Location:</strong> {ride.pickupLocation}</p>
               <p><strong>Destination:</strong> {ride.destination}</p>
-              <p><strong>Date and Time:</strong> {new Date(ride.dateTime).toLocaleString()}</p>
+              <p><strong>Date/Time:</strong> {ride.dateTime}</p>
               <p><strong>Host Name:</strong> {ride.hostName}</p>
-            </div>
-          ))
-        )}
-      </div>
+              <p><strong>Number Plate:</strong> {ride.numberPlate}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No rides joined yet.</p>
+      )}
     </div>
   );
 };

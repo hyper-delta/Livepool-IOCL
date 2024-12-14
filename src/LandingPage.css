@@ -116,3 +116,11 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.user-name.clickable {
+  cursor: pointer;
+  color: #02164F; /* Optional: Add hover effect for better UX */
+}
+.user-name.clickable:hover {
+  text-decoration: underline;
+}

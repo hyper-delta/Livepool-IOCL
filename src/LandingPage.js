@@ -1,6 +1,6 @@
 // LandingPage.js
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import './LandingPage.css';
 import SignUpForm from './SignUpForm';
@@ -12,6 +12,7 @@ const LandingPage = () => {
   const [modalType, setModalType] = useState(null); // Track modal type ('signUp' or 'logIn')
   const [user, setUser] = useState(null);
   const auth = getAuth();
+  const navigate = useNavigate(); // For navigation to Ride History page
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -36,25 +37,36 @@ const LandingPage = () => {
   };
 
   const handleLogout = () => {
-    signOut(auth).then(() => {
-      alert("You have logged out successfully.");
-    }).catch((error) => {
-      console.error("Error logging out:", error);
-    });
+    signOut(auth)
+      .then(() => {
+        alert("You have logged out successfully.");
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error);
+      });
+  };
+
+  const handleNavigateToRideHistory = () => {
+    navigate('/ride-history');
   };
 
   return (
     <div className="landing-container">
       <header className="header">
-        <img 
-          src={logo} 
-          alt="Indian Oil Corporation Limited" 
-          className="company-logo" 
+        <img
+          src={logo}
+          alt="Indian Oil Corporation Limited"
+          className="company-logo"
         />
         <div className="auth-buttons">
           {user ? (
             <div className="user-dropdown">
-              <span className="user-name">{user.displayName || user.email}</span>
+              <span 
+                className="user-name clickable"
+                onClick={handleNavigateToRideHistory} // Navigate to Ride History on click
+              >
+                {user.displayName || user.email}
+              </span>
               <button className="cta-button logout-button" onClick={handleLogout}>Logout</button>
             </div>
           ) : (
