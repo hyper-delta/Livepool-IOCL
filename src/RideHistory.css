@@ -15,10 +15,61 @@
     margin-bottom: 20px;
 }
 
-.ride-history-container h3 {
+/* Section Header */
+.section-header {
     font-size: 2rem;
-    color: #F37022;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 30px 0 20px;
+    font-weight: bold;
+    color: #F37022;
+}
+
+.section-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+/* Hosted Rides Section */
+.hosted-rides-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.hosted-ride {
+    background-color: #fffaf0;
+    border: 1px solid #f37022;
+}
+
+.hosted-ride h4 {
+    color: #f37022;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Joined Rides Section */
+.joined-rides-section {
+    background-color: #f0f7ff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.joined-ride {
+    background-color: #e6f0ff;
+    border: 1px solid #02164F;
+}
+
+.joined-ride h4 {
+    color: #02164F;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
 
 /* Ride list container */
@@ -33,8 +84,6 @@
 
 /* Ride item (card) styles */
 .ride-item {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -68,24 +117,15 @@
 }
 
 .ride-item strong {
-    color: #02164F;
+    color: #333;
 }
 
-/* Joined Ride Section Styles */
-.joined-ride-section {
-    margin-top: 40px;
-    text-align: center;
-}
-
-.joined-ride-section h3 {
-    font-size: 2rem;
-    color: #F37022;
-    margin-bottom: 20px;
-}
-
-.no-joined-rides {
+/* No rides message */
+.no-joined-rides,
+.no-hosted-rides {
     font-size: 1.2rem;
     color: #555;
+    margin-top: 20px;
 }
 
 /* Responsive design */
@@ -94,7 +134,7 @@
         font-size: 2rem;
     }
 
-    .ride-history-container h3 {
+    .section-header {
         font-size: 1.5rem;
     }
 
