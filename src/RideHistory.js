@@ -92,6 +92,7 @@ const RideHistory = () => {
                 <p><strong>Destination:</strong> {ride.destination}</p>
                 <p><strong>Date/Time:</strong> {ride.dateTime}</p>
                 <p><strong>Host Name:</strong> {ride.hostName}</p>
+                <p><strong>Host Phone:</strong> {ride.hostPhone}</p>
                 <p><strong>Number Plate:</strong> {ride.numberPlate}</p>
               </li>
             ))}

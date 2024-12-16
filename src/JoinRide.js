@@ -28,6 +28,7 @@ const JoinRide = () => {
                 hostId: userId,
                 hostName: usersData[userId].fullName || 'Unknown',
                 hostEmail: usersData[userId].email || 'Unknown',
+                hostPhone: usersData[userId].phoneNumber || 'Not Provided', // Added host phone number
                 hostIdCard: usersData[userId].employeeIdCard || null,
               });
             });
@@ -56,6 +57,7 @@ const JoinRide = () => {
           const joinedRideDetails = {
             ...rideDetails,
             hostId: hostId,
+            hostPhone: rideDetails.hostPhone, // Save the host's phone number
             timestamp: Date.now(),
           };
           push(userJoinedRidesRef, joinedRideDetails)
@@ -136,6 +138,7 @@ const JoinRide = () => {
             <p><strong>Destination:</strong> {selectedRide.destination}</p>
             <p><strong>Seats Available:</strong> {selectedRide.seatsAvailable}</p>
             <p><strong>Host Name:</strong> {selectedRide.hostName}</p>
+            <p><strong>Host Phone:</strong> {selectedRide.hostPhone}</p> {/* Display host phone */}
             {selectedRide.dateTime && (
               <p><strong>Date and Time:</strong> {new Date(selectedRide.dateTime).toLocaleString()}</p>
             )}
