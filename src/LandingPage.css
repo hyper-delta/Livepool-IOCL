@@ -1,126 +1,175 @@
-/* Header */
-.header {
-    background-color: #F37022;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .company-logo {
-    height: 75px;
-  }
-  
-  .auth-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  /* Main Content */
-  .main-content {
-    text-align: center;
-    padding: 50px;
-  }
-  
-  .main-content h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-  
-  .main-content p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-  }
-  
-  /* Call-to-Action Buttons */
-  .cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .cta-button {
-    padding: 15px 30px;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    color: #FEFEFE;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-button {
-    background-color: #02164F;
-  }
-  
-  .signup-button {
-    background-color: #F37022;
-  }
-  
-  .host-button {
-    background-color: #F37022;
-  }
-  
-  .join-button {
-    background-color: #02164F;
-  }
-  
-  .cta-button:hover {
-    opacity: 0.8;
-  }
-  
-  /* Footer */
-  .footer {
-    background-color: #02164F;
-    color: #FEFEFE;
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: auto; /* Ensures footer sticks to the bottom */
-  }
-  
-  .footer p {
-    font-size: 0.9rem;
-  }
-  
-  /* General container */
-.landing-container {
+/* Navbar */
+.navbar {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
-  text-align: center;
-  background-color: #f5f5f5;
+  align-items: center;
+  background-color: #F37022;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* LandingPage.css */
-.user-dropdown {
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #FEFEFE;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.navbar-links {
   display: flex;
-  flex-direction: column;
+  gap: 20px;
   align-items: center;
 }
 
-.user-name {
+.nav-link {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
   color: #FEFEFE;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #02164F;
+  color: #FEFEFE;
+}
+
+.cta-button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #FEFEFE;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+.login-button {
+  background-color: #02164F;
+}
+
+.signup-button {
+  background-color: #F37022;
+}
+
+.user-name {
   font-weight: bold;
-  margin-bottom: 5px;
+  color: #FEFEFE;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: color 0.3s ease;
+}
+
+.user-name:hover {
+  color: #02164F;
 }
 
 .logout-button {
   background-color: #02164F;
   color: #FEFEFE;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.user-name.clickable {
-  cursor: pointer;
-  color: #02164F; /* Optional: Add hover effect for better UX */
+.logout-button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
 }
-.user-name.clickable:hover {
-  text-decoration: underline;
+
+/* Main Content */
+.main-content {
+  text-align: center;
+  padding: 50px 20px;
+  margin: auto;
+  max-width: 800px;
+}
+
+.main-content h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #02164F;
+  margin-bottom: 15px;
+}
+
+.main-content p {
+  font-size: 1.2rem;
+  color: #555555;
+  margin-bottom: 30px;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.host-button {
+  background-color: #F37022;
+}
+
+.join-button {
+  background-color: #02164F;
+}
+
+/* Footer */
+.footer {
+  background-color: #02164F;
+  color: #FEFEFE;
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  margin-top: auto; /* Ensures footer sticks to the bottom */
+}
+
+/* General container */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+
+  .navbar-links {
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .main-content {
+    padding: 30px 15px;
+  }
+
+  .main-content h2 {
+    font-size: 2rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

@@ -5,14 +5,13 @@ import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import './LandingPage.css';
 import SignUpForm from './SignUpForm';
 import LoginForm from './LoginForm';
-import logo from './Images/IOCL-logo.png';
 
 const LandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null); // Track modal type ('signUp' or 'logIn')
   const [user, setUser] = useState(null);
   const auth = getAuth();
-  const navigate = useNavigate(); // For navigation to Ride History page
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -52,32 +51,53 @@ const LandingPage = () => {
 
   return (
     <div className="landing-container">
-      <header className="header">
-        <img
-          src={logo}
-          alt="Indian Oil Corporation Limited"
-          className="company-logo"
-        />
-        <div className="auth-buttons">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="navbar-brand">
+          <span>LivePool</span>
+        </div>
+        <div className="navbar-links">
+          <Link to="/host" className="nav-link">
+            Host a Ride
+          </Link>
+          <Link to="/join" className="nav-link">
+            Join a Ride
+          </Link>
           {user ? (
-            <div className="user-dropdown">
-              <span 
-                className="user-name clickable"
-                onClick={handleNavigateToRideHistory} // Navigate to Ride History on click
+            <>
+              <span
+                className="clickable user-name"
+                onClick={handleNavigateToRideHistory}
               >
                 {user.displayName || user.email}
               </span>
-              <button className="cta-button logout-button" onClick={handleLogout}>Logout</button>
-            </div>
+              <button
+                className="cta-button logout-button"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
-              <button className="cta-button login-button" onClick={openLoginModal}>Log In</button>
-              <button className="cta-button signup-button" onClick={openSignUpModal}>Sign Up</button>
+              <button
+                className="cta-button login-button"
+                onClick={openLoginModal}
+              >
+                Log In
+              </button>
+              <button
+                className="cta-button signup-button"
+                onClick={openSignUpModal}
+              >
+                Sign Up
+              </button>
             </>
           )}
         </div>
-      </header>
+      </nav>
 
+      {/* Main Content */}
       <main className="main-content">
         <h2>Carpooling made easy!</h2>
         <p>Offer or join a ride with your colleagues at Indian Oil Corporation Limited.</p>
@@ -91,8 +111,9 @@ const LandingPage = () => {
         </div>
       </main>
 
+      {/* Footer */}
       <footer className="footer">
-        <p>&copy; 2024 Indian Oil Corporation Limited | Livepool</p>
+        <p>&copy; 2024 Indian Oil Corporation Limited | LivePool</p>
       </footer>
 
       {/* Conditional Rendering of Sign Up or Login Modal */}
