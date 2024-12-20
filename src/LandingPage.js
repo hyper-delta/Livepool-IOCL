@@ -1,7 +1,8 @@
-// LandingPage.js
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import Navbar from './Navbar'; // Importing Navbar component
+import Footer from './Footer'; // Importing Footer component
 import './LandingPage.css';
 import SignUpForm from './SignUpForm';
 import LoginForm from './LoginForm';
@@ -51,52 +52,13 @@ const LandingPage = () => {
 
   return (
     <div className="landing-container">
-      {/* Navbar */}
-      <nav className="navbar">
-        <div className="navbar-brand">
-          <span>LivePool</span>
-        </div>
-        <div className="navbar-links">
-          <Link to="/host" className="nav-link">
-            Host a Ride
-          </Link>
-          <Link to="/join" className="nav-link">
-            Join a Ride
-          </Link>
-          {user ? (
-            <>
-              <span
-                className="clickable user-name"
-                onClick={handleNavigateToRideHistory}
-              >
-                {user.displayName || user.email}
-              </span>
-              <button
-                className="cta-button logout-button"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                className="cta-button login-button"
-                onClick={openLoginModal}
-              >
-                Log In
-              </button>
-              <button
-                className="cta-button signup-button"
-                onClick={openSignUpModal}
-              >
-                Sign Up
-              </button>
-            </>
-          )}
-        </div>
-      </nav>
-
+      <Navbar
+        user={user}
+        handleLogout={handleLogout}
+        handleNavigateToRideHistory={handleNavigateToRideHistory}
+        openSignUpModal={openSignUpModal}
+        openLoginModal={openLoginModal}
+      />
       {/* Main Content */}
       <main className="main-content">
         <h2>Carpooling made easy!</h2>
@@ -110,12 +72,7 @@ const LandingPage = () => {
           </Link>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="footer">
-        <p>&copy; 2024 Indian Oil Corporation Limited | LivePool</p>
-      </footer>
-
+      <Footer />
       {/* Conditional Rendering of Sign Up or Login Modal */}
       {isModalOpen && modalType === 'signUp' && <SignUpForm toggleModal={toggleModal} />}
       {isModalOpen && modalType === 'logIn' && <LoginForm toggleModal={toggleModal} />}
