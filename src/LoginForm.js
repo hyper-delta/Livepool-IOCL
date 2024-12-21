@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import './LoginForm.css';
+import Swal from 'sweetalert2';
 
 const LoginForm = ({ toggleModal }) => {
   const [email, setEmail] = useState('');
@@ -14,12 +15,22 @@ const LoginForm = ({ toggleModal }) => {
     // Firebase Authentication for logging in
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        alert('Login successful!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged IN',
+          text: 'You have logged IN successfully.',
+          confirmButtonText: 'OK',
+        });
         toggleModal();
       })
       .catch((error) => {
         console.error("Error logging in:", error);
-        alert("Login failed! " + error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `Error logging out: ${error.message}`,
+          confirmButtonText: 'Try Again',
+        });
       });
   };
 

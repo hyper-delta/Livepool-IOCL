@@ -1,0 +1,30 @@
+.main-section {
+  flex: 1;
+  text-align: left;
+  padding: 2rem 4rem; /* Increased padding on the right, reduced margin from the left */
+}
+
+.main-section h1 {
+  font-size: 3.5rem; /* Increased font size */
+  margin-bottom: 1rem;
+  font-family: 'Georgia', serif;
+}
+
+.main-section h2 {
+  font-size: 1.5rem; /* Slightly increased font size for better readability */
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.login-button {
+  background-color: #ffc107;
+  color: white;
+  padding: 0.75rem 2.5rem; /* Slightly larger button for better proportion */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #e0a800;
+}

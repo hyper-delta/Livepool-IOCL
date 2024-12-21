@@ -46,6 +46,52 @@
   letter-spacing: 0.5px;
   margin-top: auto; /* Ensures footer sticks to the bottom */
 }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50px;
+}
+
+h1, h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.car-image {
+  width: 400px;
+  margin-bottom: 40px;
+}
+
+.button {
+  background-color: #ffc107;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.button:hover {
+  background-color: #e0a800;
+}
 
 /* General container */
 .landing-container {
@@ -55,7 +101,12 @@
   min-height: 100vh;
   background-color: #f9f9f9;
 }
-
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .main-content {

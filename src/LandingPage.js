@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import Navbar from './Navbar'; // Importing Navbar component
 import Footer from './Footer'; // Importing Footer component
 import './LandingPage.css';
 import SignUpForm from './SignUpForm';
 import LoginForm from './LoginForm';
+// import carImage from './Images/hero image-Photoroom.png';
+import MainSection from "./MainSection";
+import CarImageComponent from "./CarImageComponent";
+import Swal from 'sweetalert2';
+
 
 const LandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,10 +44,20 @@ const LandingPage = () => {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        alert("You have logged out successfully.");
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged Out',
+          text: 'You have logged out successfully.',
+          confirmButtonText: 'OK',
+        });
       })
       .catch((error) => {
-        console.error("Error logging out:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `Error logging out: ${error.message}`,
+          confirmButtonText: 'Try Again',
+        });
       });
   };
 
@@ -61,7 +76,7 @@ const LandingPage = () => {
       />
       {/* Main Content */}
       <main className="main-content">
-        <h2>Carpooling made easy!</h2>
+        {/* <h2>Carpooling made easy!</h2>
         <p>Offer or join a ride with your colleagues at Indian Oil Corporation Limited.</p>
         <div className="cta-buttons">
           <Link to="/host">
@@ -70,7 +85,19 @@ const LandingPage = () => {
           <Link to="/join">
             <button className="cta-button join-button">Join a Ride</button>
           </Link>
-        </div>
+        </div> */}
+         {/* <div className="container">
+      <div className="content">
+        <h1>Welcome to Livepool</h1>
+        <h2>Carpooling made easy for Indian Oil Corporation employees</h2>
+        <button className="button">Log-in</button>
+      </div>
+      <img src={carImage} alt="Car" className="car-image" />
+    </div> */}
+          <div className="content-container">
+        <MainSection />
+        <CarImageComponent />
+      </div>
       </main>
       <Footer />
       {/* Conditional Rendering of Sign Up or Login Modal */}

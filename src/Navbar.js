@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import './Navbar.css'; // Ensure the CSS file contains Navbar styles
+import Swal from 'sweetalert2';
 
 const Navbar = ({
   openSignUpModal,
@@ -21,10 +22,21 @@ const Navbar = ({
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        alert("You have logged out successfully.");
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged Out',
+          text: 'You have logged out successfully.',
+          confirmButtonText: 'OK',
+        });
       })
       .catch((error) => {
         console.error("Error logging out:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `Error logging out: ${error.message}`,
+          confirmButtonText: 'Try Again',
+        });
       });
   };
 
@@ -35,7 +47,10 @@ const Navbar = ({
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <span>LivePool</span>
+        {/* Make the LivePool brand clickable */}
+        <Link to="/" className="brand-link">
+          LivePool
+        </Link>
       </div>
       <div className="navbar-links">
         <Link to="/host" className="nav-link">

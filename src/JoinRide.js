@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ref, onValue, update, push } from "firebase/database";
 import { getAuth } from 'firebase/auth';
 import database from './firebase';
+import Navbar from './Navbar'; // Importing Navbar component
+import Footer from './Footer'; // Importing Footer component
 import './JoinRide.css';
 
 const JoinRide = () => {
@@ -98,7 +100,9 @@ const JoinRide = () => {
   });
 
   return (
+    <div><Navbar/>
     <div className="join-ride-container">
+      
       <h2>Available Rides</h2>
 
       {/* Date Filter */}
@@ -168,8 +172,11 @@ const JoinRide = () => {
             <button className="cta-button close-button" onClick={closeModal}>X</button>
           </div>
         </div>
+      
       )}
     </div>
+    <Footer/>
+    </div> 
   );
 };
 

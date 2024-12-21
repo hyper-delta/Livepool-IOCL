@@ -3,6 +3,8 @@ import './HostRide.css';
 import { ref, set, push, get } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import database from './firebase';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 const HostRide = () => {
   const [rideDetails, setRideDetails] = useState({
@@ -97,6 +99,7 @@ const HostRide = () => {
   };
 
   return (
+    <div><Navbar/>
     <div className="host-ride-container">
       <h2>Host a Ride</h2>
       <form onSubmit={handleSubmit} className="ride-form">
@@ -177,6 +180,8 @@ const HostRide = () => {
           Publish Ride
         </button>
       </form>
+    </div>
+    <Footer/>
     </div>
   );
 };

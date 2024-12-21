@@ -1,14 +1,20 @@
 /* Footer */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 .footer {
-    background-color: #02164F;
-    color: #FEFEFE;
-    text-align: center;
-    padding: 15px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
-    margin-top: auto; /* Ensures footer sticks to the bottom */
-  }
-  
+  box-sizing: border-box; /* Include padding in width calculations */
+  background-color: #02164F;
+  color: #FEFEFE;
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  bottom: 0;
+  width: 100%; /* Ensure the footer spans the full width */
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  margin-top: auto;
+}

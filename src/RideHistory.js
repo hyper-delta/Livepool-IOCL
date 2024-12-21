@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import './RideHistory.css';
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const RideHistory = () => {
   const [hostedRides, setHostedRides] = useState([]);
@@ -48,6 +50,7 @@ const RideHistory = () => {
   }, [auth, database]);
 
   return (
+    <div><Navbar/>
     <div className="ride-history-container">
       <h2>Your Ride History</h2>
 
@@ -101,6 +104,8 @@ const RideHistory = () => {
           <p>No rides joined yet.</p>
         )}
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 };
